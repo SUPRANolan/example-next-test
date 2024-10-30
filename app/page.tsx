@@ -1,5 +1,17 @@
 import Image from "next/image";
+import { HexString, SupraAccount, SupraClient, BCS } from "supra-l1-sdk";
 
+let supraClient = await SupraClient.init(
+  // "http://localhost:27001/"
+  "https://rpc-testnet.supra.com/"
+);
+
+let senderAccount = new SupraAccount(
+  Buffer.from(
+    "2b9654793a999d1d487dabbd1b8f194156e15281fa1952af121cc97b27578d89",
+    "hex"
+  )
+);
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -14,9 +26,10 @@ export default function Home() {
         />
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2">
-            Get started by editing{" "}
+            Account Address:
             <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
+            {senderAccount.address().toString()}
+              
             </code>
             .
           </li>
